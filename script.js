@@ -117,15 +117,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const messageInput = document.getElementById('contact-message');
             if (messageInput) {
                 const message = messageInput.value;
-                // 「アクセス」と「人」の両方が含まれているかチェック
-                if (message.includes('アクセス') && message.includes('人')) {
+                // 場所関連のキーワードと人関連のキーワード群を正規表現で定義
+                const hasLocationKeyword = /(アクセス|場所|行き方|住所|六本木|乃木坂|送迎|車|レクサス|どこ)/.test(message);
+                const hasPersonKeyword = /(人|付き添い|同乗|付き人|同伴|誰|男|女)/.test(message);
+
+                // 両方のカテゴリからそれぞれ1つ以上キーワードが含まれていれば発動
+                if (hasLocationKeyword && hasPersonKeyword) {
                     // 通常の遷移（reservation.htmlへのホラー遷移）をキャンセル
                     e.preventDefault();
 
-                    // 野獣ギミックの発動
+                    // 野獣ギミック（pachinko.html）の発動
                     showBeastEasterEgg();
                 }
-                // 含まれていない場合はそのまま reservation.html に遷移する
+                // 含まれていない場合はそのまま action="reservation.html" により遷移する
             }
         });
     }
