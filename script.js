@@ -116,18 +116,20 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', function (e) {
             const messageInput = document.getElementById('contact-message');
             if (messageInput) {
-                const message = messageInput.value;
-                // 送迎・同乗者（迎え、付き添いなど）に関するキーワード
+                // 1. 屋上（ピンク野獣）ギミックの条件：自力で向かう手段を聞いている場合
+                const hasSelfDirection = /(自分|自力|直接|徒歩|一人|ひとり|歩き|自車)(で?)(向か|行|伺|来|着)/.test(message) || /(どうすれば|どうやって|どの様に|どのように|場所).*(向か|行|着)/.test(message) || message.includes('自分で向かいたい');
+
+                // 2. パチンコギミックの条件：送迎・付き添いの担当者を特定しようとする場合
                 const hasEscortKeyword = /(お?迎え|送迎|付き添い|付き人|同乗|同行|担当|来る人|来られる|お越しになる)/.test(message);
-                // その人物の素性（誰か、どんなか、名前など）を尋ねるキーワード
                 const hasIdentityQuestion = /(誰|だれ|どなた|どんな|どのような|どういった|名前|なまえ|氏名|特徴|性別|男|女|関係|教えて|伺え|伺って|伺いた|知りたい|把握|確認|何者)/.test(message);
 
-                // 付き添いの人がどんな人なのかを聞いてきている場合に発動
-                if (hasEscortKeyword && hasIdentityQuestion) {
-                    // 通常の遷移（reservation.htmlへのホラー遷移）をキャンセル
+                if (hasSelfDirection) {
+                    // 通常の遷移をキャンセルし、屋上ページへ
                     e.preventDefault();
-
-                    // 野獣ギミック（pachinko.html）の発動
+                    window.location.href = 'okujo.html';
+                } else if (hasEscortKeyword && hasIdentityQuestion) {
+                    // 通常の遷移をキャンセルし、野獣パチンコへ
+                    e.preventDefault();
                     showBeastEasterEgg();
                 }
                 // 条件に満たない場合は通常の action="reservation.html" による遷移へ

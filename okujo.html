@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>屋上 | LUXE MIND CLINIC</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #ffccdd;
+            /* ピンク背景 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #d11a59;
+            font-family: 'Noto Serif JP', serif;
+            text-align: center;
+            animation: bg-pulse 3s infinite alternate;
+        }
+
+        @keyframes bg-pulse {
+            0% {
+                background-color: #ffb3cc;
+            }
+
+            100% {
+                background-color: #ffccd9;
+            }
+        }
+
+        .yaju-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        .yaju-img {
+            max-width: 80vw;
+            max-height: 60vh;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(255, 105, 180, 0.8), 0 0 100px rgba(255, 20, 147, 0.5);
+            /* 少し赤みがかったフィルターで紅潮感をブースト */
+            filter: contrast(1.1) saturate(1.4) sepia(0.3) hue-rotate(-15deg);
+        }
+
+        /* 頬の紅潮エフェクト（画像の上の左右にピンクのぼかし円を配置） */
+        .blush {
+            position: absolute;
+            width: 15vw;
+            height: 10vw;
+            max-width: 120px;
+            max-height: 80px;
+            background: radial-gradient(circle, rgba(255, 20, 147, 0.7) 0%, rgba(255, 20, 147, 0) 70%);
+            border-radius: 50%;
+            filter: blur(15px);
+            animation: blush-pulse 2s infinite alternate;
+            pointer-events: none;
+        }
+
+        .blush-left {
+            top: 40%;
+            left: 15%;
+        }
+
+        .blush-right {
+            top: 40%;
+            right: 15%;
+        }
+
+        @keyframes blush-pulse {
+            0% {
+                opacity: 0.6;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .message {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8), 0 0 25px rgba(255, 20, 147, 0.8);
+            letter-spacing: 0.05em;
+            line-height: 1.5;
+            padding: 0 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="yaju-container">
+        <!-- 既存の野獣画像を利用 -->
+        <img src="野獣.jpg" alt="Yaju" class="yaju-img">
+        <!-- 頬を紅潮させるレイヤー -->
+        <div class="blush blush-left"></div>
+        <div class="blush blush-right"></div>
+    </div>
+
+    <div class="message">
+        まずうちさぁ・・・屋上・・・あんだけど、<br>
+        焼いてかない？
+    </div>
+</body>
+
+</html>
