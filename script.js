@@ -116,13 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', function (e) {
             const messageInput = document.getElementById('contact-message');
             if (messageInput) {
-                const message = messageInput.value;
-                // 1. 屋上（ピンク野獣）ギミックの条件：自力で向かう手段を聞いている場合
-                const hasSelfDirection = /(自分|自力|直接|徒歩|一人|ひとり|歩き|自車)(で?)(向か|行|伺|来|着)/.test(message) || /(どうすれば|どうやって|どの様に|どのように|場所).*(向か|行|着)/.test(message) || message.includes('自分で向かいたい');
+                // フォームの送信内容から改行やスペースを除去して判定しやすくする
+                const message = messageInput.value.replace(/\s+/g, '');
 
-                // 2. パチンコギミックの条件：送迎・付き添いの担当者を特定しようとする場合
-                const hasEscortKeyword = /(お?迎え|送迎|付き添い|付き人|同乗|同行|担当|来る人|来られる|お越しになる)/.test(message);
-                const hasIdentityQuestion = /(誰|だれ|どなた|どんな|どのような|どういった|名前|なまえ|氏名|特徴|性別|男|女|関係|教えて|伺え|伺って|伺いた|知りたい|把握|確認|何者)/.test(message);
+                // 1. 屋上ギミックの条件（自力・歩き・自分・一人）
+                const hasSelfDirection = /(自分|自力|直接|徒歩|一人|ひとり|歩き|車|場所|どうすれば)/.test(message);
+
+                // 2. パチンコギミックの条件（迎え・付き添いで、誰か教えろ系）
+                const hasEscortKeyword = /(迎え|送迎|付|同乗|同行|担当|来|越)/.test(message);
+                const hasIdentityQuestion = /(誰|だれ|どんな|名前|特徴|性別|男|女|関係|教え|伺|知|何者)/.test(message);
 
                 const cacheBuster = '?t=' + new Date().getTime();
 
