@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEVER!!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: #fff;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            user-select: none;
+        }
+
+        /* 筐体デザイン風 */
+        .machine-container {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(255, 140, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.8);
+            border: 5px solid #ffeb3b;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slot-title {
+            text-align: center;
+            font-size: 3rem;
+            margin: 0 0 20px 0;
+            color: #fff;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 2px 2px 0 #000;
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        .slots {
+            display: flex;
+            gap: 20px;
+            background-color: #000;
+            padding: 30px;
+            border-radius: 10px;
+            border: inset 8px #444;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3) inset;
+        }
+
+        .reel-container {
+            width: 150px;
+            height: 200px;
+            background-color: #fff;
+            border: 4px solid #333;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 20px 20px -20px rgba(0, 0, 0, 0.8), inset 0 -20px 20px -20px rgba(0, 0, 0, 0.8);
+        }
+
+        .reel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: top 3s cubic-bezier(0.1, 0.7, 0.1, 1);
+        }
+
+        .symbol {
+            width: 150px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            color: #d32f2f;
+            border-bottom: 1px solid #eee;
+            box-sizing: border-box;
+            background: linear-gradient(to bottom, #fdfbfb 0%, #ebedee 100%);
+            text-shadow: 2px 2px 0px #ccc;
+        }
+
+        .symbol img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 大当たり時の演出（DOM追加用） */
+        .jackpot-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: transparent;
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        @keyframes beastFlash {
+            0% {
+                filter: opacity(1) brightness(1);
+            }
+
+            50% {
+                filter: opacity(0.8) brightness(1.5) hue-rotate(90deg);
+            }
+
+            100% {
+                filter: opacity(1) brightness(2) invert(1);
+            }
+        }
+
+        @keyframes beastShake {
+            0% {
+                transform: translate(0, 0) scale(1.2);
+                filter: hue-rotate(0deg);
+            }
+
+            20% {
+                transform: translate(-10px, 10px) scale(1.3);
+                filter: hue-rotate(90deg);
+            }
+
+            40% {
+                transform: translate(10px, -10px) scale(1.1);
+                filter: hue-rotate(180deg);
+            }
+
+            60% {
+                transform: translate(-15px, -5px) scale(1.4);
+                filter: hue-rotate(270deg);
+            }
+
+            80% {
+                transform: translate(15px, 5px) scale(1.1);
+                filter: hue-rotate(360deg);
+            }
+
+            100% {
+                transform: translate(0, 0) scale(1.2);
+                filter: hue-rotate(0deg);
+            }
+        }
+
+        @keyframes textShake {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                text-shadow: 0 0 10px red;
+            }
+
+            25% {
+                transform: translate(15px, 15px) rotate(5deg);
+                text-shadow: 0 0 50px red, 0 0 80px yellow;
+            }
+
+            50% {
+                transform: translate(0, 0) rotate(0deg);
+                text-shadow: 0 0 10px red;
+            }
+
+            75% {
+                transform: translate(-15px, 15px) rotate(-5deg);
+                text-shadow: 0 0 50px red, 0 0 80px yellow;
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+                text-shadow: 0 0 10px red;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* 大当たり状態のクラス */
+        body.jackpot-active .machine-container {
+            display: none;
+        }
+
+        body.jackpot-active .jackpot-overlay {
+            display: flex;
+            background-image: url('パチ.jpg');
+            background-size: cover;
+            background-position: center;
+            animation: beastFlash 0.08s infinite alternate;
+        }
+
+        .jackpot-img {
+            max-width: 90vw;
+            max-height: 70vh;
+            object-fit: contain;
+            box-shadow: 0 0 100px red;
+            animation: beastShake 0.1s infinite;
+        }
+
+        .jackpot-text {
+            color: #fff;
+            font-size: clamp(4rem, 15vw, 15rem);
+            font-family: monospace;
+            font-weight: 900;
+            margin: 20px 0 0 0;
+            line-height: 1;
+            white-space: nowrap;
+            animation: textShake 0.08s infinite reverse;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="machine-container" id="machine">
+        <h1 class="slot-title">SUPER LUXE BONUS!</h1>
+        <div class="slots">
+            <div class="reel-container">
+                <div class="reel" id="reel1"></div>
+            </div>
+            <div class="reel-container">
+                <div class="reel" id="reel2"></div>
+            </div>
+            <div class="reel-container">
+                <div class="reel" id="reel3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jackpot-overlay" id="jackpot">
+        <img src="野獣.jpg" class="jackpot-img" alt="野獣">
+        <h1 class="jackpot-text">ﾝｧｰｯ‼‼‼</h1>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const symbols = [
+                '1', '2', '3', '4', '<img src="野獣.jpg">', '5', '6', '7', '8', '9'
+            ];
+
+            // 野獣図柄のインデックスは配列の4番目（0始まり）
+            const beastIndex = 4;
+            const symbolHeight = 200; // .symbol height
+
+            // 各リールを設定
+            function setupReel(reelId, loopTimes) {
+                const reel = document.getElementById(reelId);
+                let html = '';
+
+                // 回転させる総要素数
+                const totalSymbols = symbols.length * loopTimes;
+
+                // 初期の図柄からループして並べる
+                for (let i = 0; i < totalSymbols; i++) {
+                    const sym = symbols[i % symbols.length];
+                    html += `<div class="symbol">${sym}</div>`;
+                }
+
+                // 最後に必ず「野獣」が来るように追加
+                html += `<div class="symbol">${symbols[beastIndex]}</div>`;
+
+                reel.innerHTML = html;
+
+                // 上から下にスクロールしているように見せるため、
+                // 初期位置を一番下の要素の近く（マイナス方向）に設定する。
+                // 止まりたい図柄（一番下に追加した野獣）はインデックス `totalSymbols`。
+                // top: 0 のときは一番上の要素（インデックス0）が見える。
+                // したがって、一番初期の位置（回転前）を `0` にして、
+                // 目標位置（野獣）を上に引き上げるためにマイナスにする。
+                // 今回は「上からはらはら落ちてくる」動きにしたいので、
+                // top にマイナス値を入れておき、topを0に近づけていく動きにするのが楽。
+
+                const startPos = 0; // 一番上の要素が見えている状態
+                const targetPos = - (totalSymbols * symbolHeight); // 一番下の野獣が見える状態
+
+                reel.style.top = startPos + 'px';
+
+                return {
+                    element: reel,
+                    targetPos: targetPos
+                };
+            }
+
+            // 回転数（図柄の個数）を変えて止まるタイミングをずらす
+            const r1 = setupReel('reel1', 10);
+            const r3 = setupReel('reel3', 15);
+            const r2 = setupReel('reel2', 25);
+
+            // 演出開始
+            setTimeout(() => {
+                // 左リール
+                r1.element.style.transition = 'top 3s cubic-bezier(0.1, 0.7, 0.1, 1)';
+                r1.element.style.top = r1.targetPos + 'px';
+
+                // 右リール（少し遅れて止まる）
+                setTimeout(() => {
+                    r3.element.style.transition = 'top 3s cubic-bezier(0.1, 0.7, 0.1, 1)';
+                    r3.element.style.top = r3.targetPos + 'px';
+                }, 500);
+
+                // 中リール（最後に止まり、焦らす）
+                setTimeout(() => {
+                    r2.element.style.transition = 'top 5s cubic-bezier(0.1, 0.7, 0.1, 1)'; // ゆっくり止まる
+                    r2.element.style.top = r2.targetPos + 'px';
+
+                    // すべてのリールが止まった（野獣が揃った）タイミングで大当たり演出発動
+                    r2.element.addEventListener('transitionend', () => {
+                        setTimeout(() => {
+                            document.body.classList.add('jackpot-active');
+                        }, 500); // 揃ってから0.5秒のタメ
+                    });
+                }, 1000);
+            }, 500);
+        });
+    </script>
+</body>

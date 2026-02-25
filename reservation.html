@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation - LUXE MIND CLINIC</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            /* 白基調 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            /* ゴシック体 */
+            overflow: hidden;
+        }
+
+        .blink-text {
+            color: #ff0000;
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            /* 煽りつつも読み取れる絶妙な速度（0.5秒間隔） */
+            animation: blinker 0.5s steps(2, start) infinite;
+        }
+
+        @keyframes blinker {
+            to {
+                visibility: hidden;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .blink-text {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blink-text">今までありがとう</div>
+</body>
+
+</html>

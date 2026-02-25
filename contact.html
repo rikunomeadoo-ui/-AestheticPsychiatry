@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ | LUXE MIND CLINIC</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body style="padding-top: 80px; background-color: var(--bg-white);">
+    <header id="header">
+        <div class="header-container">
+            <h1 class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">LUXE MIND CLINIC</a>
+            </h1>
+            <nav class="desktop-nav">
+                <a href="about.html" class="nav-link"><span class="nav-en">About</span>美容精神科とは</a>
+                <a href="target.html" class="nav-link"><span class="nav-en">Target</span>対象疾患</a>
+                <a href="message.html" class="nav-link"><span class="nav-en">Message</span>院長挨拶</a>
+                <a href="treatment.html" class="nav-link"><span class="nav-en">Treatment</span>治療のメカニズム</a>
+                <a href="price.html" class="nav-link"><span class="nav-en">Price</span>料金表</a>
+                <a href="access.html" class="nav-link"><span class="nav-en">Access</span>アクセス</a>
+                <a href="contact.html" class="nav-link"><span class="nav-en">FAQ & Contact</span>よくある質問・お問い合わせ</a>
+                <a href="index.html#reservation" class="nav-link btn-small btn-primary" style="color:#fff;"><span
+                        class="nav-en" style="color:#fff;">Reserve</span>ご予約</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    <main>
+        <section id="faq" class="section bg-light-pink section-view active" style="padding-bottom: 60px;">
+            <div class="container">
+                <span class="en-title text-center">FAQ</span>
+                <h2 class="section-title">よくあるご質問</h2>
+                <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
+                    <details class="faq-item">
+                        <summary class="faq-q">保険診療による受診は可能ですか？</summary>
+                        <div class="faq-a">
+                            <p>当院は「完全自由診療」のクリニックとなります。最高の空間と洗練された医療体験をご提供するため、一切の保険適用を行っておりません。あらかじめご了承の上、ご予約をお願いいたします。
+                            </p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-q">誰でも予約・受診できますか？</summary>
+                        <div class="faq-a">
+                            <p>当クリニックは、完全紹介制・完全会員制となっております。一定の審査基準を満たす患者様にのみ、当院での特別なコンサルテーションをご案内しております。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-q">費用の分割払いや医療ローンは組めますか？</summary>
+                        <div class="faq-a">
+                            <p>恐れ入りますが、各種医療ローン・分割払いは承っておりません。お支払いは「一括」での各種クレジットカード決済、または事前の銀行振込のみのご対応となります。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-q">男性でも受診可能ですか？</summary>
+                        <div class="faq-a">
+                            <p>男性の患者様も受診可能ですが、当院の規定により全ての診療メニューにおいて「一律3倍」の料金設定となりますことをご承知おきください。</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section section-view active"
+            style="background-color: var(--bg-white); padding-top: 60px;">
+            <div class="container">
+                <span class="en-title text-center">Contact Form</span>
+                <h2 class="section-title">お問い合わせフォーム</h2>
+                <p class="section-description">よくあるご質問で解決しないご相談や、入会審査に関するお問い合わせはこちらから承ります。<br>※ご返信には数日を要する場合がございます。</p>
+
+                <div class="contact-form-wrapper" style="max-width: 600px; margin: 40px auto 0;">
+                    <!-- 🔥ここで reservation.html に飛ばす悪魔の罠を設定🔥 -->
+                    <form action="reservation.html" method="GET" class="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">お名前 <span class="required">必須</span></label>
+                            <input type="text" id="contact-name" name="name" required placeholder="例）一条 麗">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">メールアドレス <span class="required">必須</span></label>
+                            <input type="email" id="contact-email" name="email" required
+                                placeholder="例）info@luxemind.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-type">お問い合わせ種別</label>
+                            <select id="contact-type" name="type">
+                                <option value="exam">入会審査・紹介に関するご相談</option>
+                                <option value="second-opinion">術前セカンドオピニオンについて</option>
+                                <option value="cbt">美容特化型CBTプログラムについて</option>
+                                <option value="other">その他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">お問い合わせ・ご相談内容 <span class="required">必須</span></label>
+                            <textarea id="contact-message" name="message" rows="6" required
+                                placeholder="具体的なお悩みやご相談内容を詳しくご記入ください。長文でも構いません。"></textarea>
+                        </div>
+                        <div class="form-submit text-center" style="margin-top: 32px;">
+                            <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">送信する</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-info">
+                <h2 class="footer-logo">LUXE MIND CLINIC</h2>
+                <p>・正式標榜科名：精神科、心療内科</p>
+                <p>・完全予約制 / オンライン診療対応</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">特定商取引法に基づく表記</a>
+                <a href="contact.html">お問い合わせ</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LUXE MIND CLINIC. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

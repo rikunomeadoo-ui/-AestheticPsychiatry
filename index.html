@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美容精神科 | 外見の悩みと心のケア専門クリニック</title>
+    <meta name="description" content="身体醜形障害（BDD）や美容整形への依存に悩む方へ。当院は適切な精神医学的アプローチ（薬物療法・認知行動療法）でサポートする精神科・心療内科クリニックです。">
+    <link rel="stylesheet" href="style.css">
+    <!-- エレガントな明朝体・セリフ体フォントを追加 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header id="header">
+        <div class="header-container">
+            <h1 class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">LUXE MIND CLINIC</a>
+            </h1>
+            <nav class="desktop-nav">
+                <a href="about.html" class="nav-link"><span class="nav-en">About</span>美容精神科とは</a>
+                <a href="target.html" class="nav-link"><span class="nav-en">Target</span>対象疾患</a>
+                <a href="message.html" class="nav-link"><span class="nav-en">Message</span>院長挨拶</a>
+                <a href="treatment.html" class="nav-link"><span class="nav-en">Treatment</span>治療のメカニズム</a>
+                <a href="price.html" class="nav-link"><span class="nav-en">Price</span>料金表</a>
+                <a href="access.html" class="nav-link"><span class="nav-en">Access</span>アクセス</a>
+                <a href="contact.html" class="nav-link"><span class="nav-en">FAQ & Contact</span>よくある質問・お問い合わせ</a>
+                <a href="index.html#reservation" class="nav-link btn-small btn-primary" style="color:#fff;"><span
+                        class="nav-en" style="color:#fff;">Reserve</span>ご予約</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="app">
+        <div class="view-container">
+            <!-- ヒーローセクション -->
+            <section id="hero" class="hero section-view active">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <!-- 最も強調するキーワード -->
+                        <h2 class="hero-clinic-name">
+                            <span>Aesthetic Psychiatry</span>
+                            美容精神科
+                        </h2>
+                        <h3 class="hero-title">外見への「とらわれ」を、<br>医学的アプローチで解き放つ。</h3>
+                        <p class="hero-subtitle">私たちは、身体醜形障害（BDD）や美容整形への依存に悩む方に特化した、<br
+                                class="desktop-only">精神医学的アプローチを提供する、新しい形のクリニックです。</p>
+                        <div class="hero-actions">
+                            <a href="#reservation" class="btn btn-primary" data-link>初診ご予約</a>
+                            <a href="about.html" class="btn btn-secondary" data-link>診療コンセプト</a>
+                        </div>
+                    </div>
+                    <!-- 右側のキービジュアル画像エリア -->
+                    <div class="hero-image-wrapper">
+                        <img src="Gemini_Generated_Image_7bv0na7bv0na7bv0.png" alt="ラグジュアリーな美容精神科クリニックの内装"
+                            class="hero-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 予約機能 -->
+            <section id="reservation" class="section bg-light-pink text-center section-view active">
+                <div class="container">
+                    <span class="en-title text-center">Reservation</span>
+                    <h2 class="section-title">初診オンラインご予約</h2>
+                    <p class="reservation-desc">当クリニックはプライバシーに配慮した完全予約制となります。<br
+                            class="desktop-only">スムーズな受診のため、オンラインでの事前問診とご予約をお願いしております。</p>
+
+                    <div class="reservation-box" style="margin-top: 40px;">
+                        <p class="mb-4" style="color: var(--text-muted);">※ご予約は完全審査制の外部システムへ移行します。</p>
+                        <a href="reservation.html" class="btn btn-primary btn-large"
+                            style="display: inline-block; text-decoration: none;">予約システムへ進む</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-info">
+                <h2 class="footer-logo">LUXE MIND CLINIC</h2>
+                <p>・正式標榜科名：精神科、心療内科</p>
+                <p>・完全予約制 / オンライン診療対応</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">特定商取引法に基づく表記</a>
+                <a href="contact.html">お問い合わせ</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LUXE MIND CLINIC. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- モーダル -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal">&times;</button>
+            <span class="en-title">Online Booking</span>
+            <h3>オンライン診療予約</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">ここに外部決済・予約システム（ウィジェット等）が読み込まれます。</p>
+            <div class="dummy-booking-ui">
+                <div class="dummy-field"></div>
+                <div class="dummy-field"></div>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 16px;">予約を確定する</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
