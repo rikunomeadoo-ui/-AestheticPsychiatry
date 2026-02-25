@@ -123,22 +123,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const hasEscortKeyword = /(お?迎え|送迎|付き添い|付き人|同乗|同行|担当|来る人|来られる|お越しになる)/.test(message);
                 const hasIdentityQuestion = /(誰|だれ|どなた|どんな|どのような|どういった|名前|なまえ|氏名|特徴|性別|男|女|関係|教えて|伺え|伺って|伺いた|知りたい|把握|確認|何者)/.test(message);
 
+                const cacheBuster = '?t=' + new Date().getTime();
+
                 if (hasSelfDirection) {
                     // 通常の遷移をキャンセルし、屋上ページへ
                     e.preventDefault();
-                    window.location.href = 'okujo.html';
+                    window.location.href = 'okujo.html' + cacheBuster;
                 } else if (hasEscortKeyword && hasIdentityQuestion) {
                     // 通常の遷移をキャンセルし、野獣パチンコへ
                     e.preventDefault();
-                    showBeastEasterEgg();
+                    window.location.href = 'pachinko.html' + cacheBuster;
                 }
                 // 条件に満たない場合は通常の action="reservation.html" による遷移へ
             }
         });
     }
 
-    function showBeastEasterEgg() {
-        // パチンコ演出ページへ遷移させる
-        window.location.href = 'pachinko.html';
-    }
+    // function showBeastEasterEgg() は不要になったため削除
 });
