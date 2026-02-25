@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', function (e) {
             const messageInput = document.getElementById('contact-message');
             if (messageInput) {
+                const message = messageInput.value;
                 // 1. 屋上（ピンク野獣）ギミックの条件：自力で向かう手段を聞いている場合
                 const hasSelfDirection = /(自分|自力|直接|徒歩|一人|ひとり|歩き|自車)(で?)(向か|行|伺|来|着)/.test(message) || /(どうすれば|どうやって|どの様に|どのように|場所).*(向か|行|着)/.test(message) || message.includes('自分で向かいたい');
 
